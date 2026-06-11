@@ -1345,20 +1345,45 @@ a:focus-visible {
   transition: transform 420ms ease;
 }
 
+.process-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.process-info {
+  position: sticky;
+  top: 100px;
+}
+
+.process-extra {
+  margin-top: 24px;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  color: var(--color-iron);
+  line-height: 1.6;
+}
+
+.process-extra p {
+  margin-bottom: 12px;
+}
+
 .process-panel {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  padding: 34px 0 0;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 0 0 0 34px;
 }
 
 .process-line {
   position: absolute;
-  top: 44px;
-  right: 7%;
-  left: 7%;
-  height: 1px;
+  top: 24px;
+  bottom: 24px;
+  left: 10px;
+  width: 1px;
+  height: auto;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
 }
@@ -1367,17 +1392,16 @@ a:focus-visible {
   display: block;
   width: 100%;
   height: 100%;
-  transform: scaleX(0);
-  transform-origin: left center;
+  transform: scaleY(0);
+  transform-origin: top center;
   background: var(--color-ink-black);
 }
 
 .process-step {
   position: relative;
-  min-height: 230px;
-  padding: 42px 22px 22px;
+  padding: 32px 28px;
   border: 1px solid rgba(0, 0, 0, 0.28);
-  border-radius: 32px;
+  border-radius: 24px;
   background: rgba(246, 243, 241, 0.76);
   transition:
     border-color 240ms ease,
@@ -1392,8 +1416,9 @@ a:focus-visible {
 
 .process-step > span {
   position: absolute;
-  top: 4px;
-  left: 22px;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
   width: 13px;
   height: 13px;
   border: 1px solid var(--color-ink-black);
@@ -1404,7 +1429,7 @@ a:focus-visible {
 
 .process-step.is-active > span {
   background: var(--color-ink-black);
-  transform: scale(1.18);
+  transform: translateY(-50%) scale(1.18);
 }
 
 .service-card {
@@ -1638,6 +1663,183 @@ a:focus-visible {
   box-shadow: 0 1px 12px rgba(0,0,0,0.06);
 }
 
+/* ─── Boot Screen ─── */
+.boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-parchment-cream);
+  color: var(--color-graphite);
+}
+
+.boot-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.024) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+
+.boot-content {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 48px);
+  max-width: 640px;
+  padding: 40px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: var(--color-parchment-cream);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+}
+
+.boot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.boot-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-ink-black);
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.boot-skip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-iron);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.boot-skip:hover {
+  color: var(--color-ink-black);
+}
+
+.boot-main h1 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.boot-subtitle {
+  font-size: 13px;
+  color: var(--color-steel);
+  margin-bottom: 40px;
+}
+
+.boot-flow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-graphite);
+  margin-bottom: 48px;
+}
+
+.boot-flow-arrow {
+  color: var(--color-iron);
+}
+
+.boot-modules {
+  margin-bottom: 60px;
+}
+
+.boot-modules-title {
+  font-size: 11px;
+  color: var(--color-iron);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.boot-modules ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.boot-modules li {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-graphite);
+}
+
+.boot-module-status {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 12px;
+  background: var(--color-iron);
+  transition: background-color 0.3s;
+}
+
+.boot-modules li.is-ready .boot-module-status {
+  background: var(--color-mint-chill);
+  box-shadow: 0 0 8px var(--color-mint-chill);
+}
+
+.boot-module-name {
+  width: 120px;
+}
+
+.boot-module-state {
+  color: var(--color-steel);
+  font-size: 11px;
+}
+
+.boot-modules li.is-ready .boot-module-state {
+  color: var(--color-graphite);
+}
+
+.boot-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.boot-progress-bar {
+  flex: 1;
+  height: 2px;
+  background: rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.boot-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--color-ink-black);
+  transition: width 0.1s linear;
+}
+
+.boot-progress-text {
+  font-size: 12px;
+  color: var(--color-graphite);
+  width: 40px;
+  text-align: right;
+}
+
 /* ─── Cursor trail dot (desktop only) ─── */
 .cursor-dot {
   position: fixed;
@@ -1789,15 +1991,23 @@ a:focus-visible {
     aspect-ratio: 16 / 9;
   }
 
+  .process-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .process-info {
+    position: relative;
+    top: 0;
+  }
   .process-panel {
     gap: 14px;
-    padding-top: 0;
+    padding-left: 24px;
   }
 
   .process-line {
     top: 0;
     bottom: 0;
-    left: 28px;
+    left: 4px;
     width: 1px;
     height: auto;
   }
@@ -1809,13 +2019,11 @@ a:focus-visible {
   }
 
   .process-step {
-    min-height: auto;
-    padding: 28px 24px 28px 52px;
+    padding: 24px 20px;
   }
 
   .process-step > span {
-    top: 32px;
-    left: 23px;
+    left: -26px;
   }
 
   .contact-grid {

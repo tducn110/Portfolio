@@ -237,10 +237,9 @@ function initProcessMotion() {
   const processSteps = gsap.utils.toArray<HTMLElement>(motion("process-step"));
   if (!processPanel || !processSteps.length) return;
 
-  const narrow = isNarrowViewport();
   gsap.fromTo(
     motion("process-fill"),
-    { scaleX: narrow ? 1 : 0, scaleY: narrow ? 0 : 1 },
+    { scaleX: 1, scaleY: 0 },
     {
       scaleX: 1,
       scaleY: 1,

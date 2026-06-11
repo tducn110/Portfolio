@@ -10,6 +10,7 @@ import { OriginSection } from "./portfolio/OriginSection";
 import { ProcessSection } from "./portfolio/ProcessSection";
 import { ProjectsSection } from "./portfolio/ProjectsSection";
 import { ServiceSection } from "./portfolio/ServiceSection";
+import { BootScreen } from "./portfolio/BootScreen";
 import { ThreeBackgroundLoader } from "./portfolio/ThreeBackgroundLoader";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
 
   return (
     <div ref={rootRef} className="portfolio-root" style={{ backgroundColor: C.parchment }}>
+      <BootScreen />
       <ThreeBackgroundLoader />
       <Nav />
       <main>
