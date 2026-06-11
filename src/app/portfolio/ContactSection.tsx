@@ -7,11 +7,11 @@ export function ContactSection() {
       <div className="contact-grid">
         <div className="contact-copy reveal" data-motion={motionAttr("reveal")}>
           <p>Contact</p>
-          <h2>Let's build something useful.</h2>
+          <h2>Let’s build something that matters.</h2>
           <span>
             Bring a rough idea, a project that needs structure, or a portfolio
-            story that is hard to explain. I can help turn it into a usable web
-            product.
+            story that’s hard to explain — I’ll help shape it into something
+            clear and usable.
           </span>
         </div>
 

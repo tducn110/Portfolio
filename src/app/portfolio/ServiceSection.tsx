@@ -10,11 +10,11 @@ export function ServiceSection() {
       <div className="service-card reveal" data-motion={motionAttr("reveal")}>
         <div>
           <p className="service-kicker">Portfolio Website Service</p>
-          <h2>Your strengths deserve a website that shows them clearly.</h2>
+          <h2>Your strengths deserve to be seen clearly.</h2>
           <p>
-            I build portfolio websites for students, developers, creators, and
-            small project owners who want their story, skills, and work to be
-            easier to understand, trust, and remember.
+            I build portfolio websites for students, developers, and creators
+            who want their story, skills, and work to feel easier to understand,
+            trust, and remember. Not decoration — structure.
           </p>
           <button
             type="button"

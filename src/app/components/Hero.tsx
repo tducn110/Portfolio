@@ -51,21 +51,21 @@ export function Hero() {
       }
 
       const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-      tl.from(".hero-label", { opacity: 0, y: 10, duration: 0.5 })
-        .from(".hero-title", { opacity: 0, y: 12, duration: 0.6 }, "-=0.25")
-        .from(".hero-subtitle", { opacity: 0, y: 10, duration: 0.5 }, "-=0.3")
+      tl.from(".hero-label", { opacity: 0.72, y: 10, duration: 0.5 })
+        .from(".hero-title", { opacity: 0.72, y: 12, duration: 0.6 }, "-=0.25")
+        .from(".hero-subtitle", { opacity: 0.72, y: 10, duration: 0.5 }, "-=0.3")
         .from(
           ".hero-cta",
-          { opacity: 0, y: 8, stagger: 0.08, duration: 0.45 },
+          { opacity: 0.72, y: 8, stagger: 0.08, duration: 0.45 },
           "-=0.25",
         )
-        .from(".hero-facts", { opacity: 0, y: 8, duration: 0.45 }, "-=0.2");
+        .from(".hero-facts", { opacity: 0.72, y: 8, duration: 0.45 }, "-=0.2");
 
       // Floating tech tags — desktop (fine pointer) only, gentle infinite bob.
       if (window.matchMedia("(pointer: fine)").matches) {
         gsap.fromTo(
           ".float-layer",
-          { opacity: 0, scale: 0.92 },
+          { opacity: 0.72, scale: 0.96 },
           { opacity: 1, scale: 1, duration: 0.8, stagger: 0.06, delay: 0.3 },
         );
         gsap.to(".float-layer", {

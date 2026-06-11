@@ -1551,6 +1551,115 @@ a:focus-visible {
   font-size: 13px;
 }
 
+/* ─── Three.js background canvas ─── */
+.three-bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.12;
+}
+
+/* ─── Parallax depth layer ─── */
+.parallax-layer {
+  will-change: transform;
+}
+
+/* ─── Section divider ─── */
+.section-divider {
+  max-width: var(--page-max-width);
+  height: 1px;
+  margin: 0 auto;
+  padding: 0 24px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.22), transparent);
+}
+
+/* ─── Capability strip (horizontal scroll) ─── */
+.capability-strip {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.capability-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Hero gradient wash ─── */
+.hero-content::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 680px;
+  height: 420px;
+  background: radial-gradient(ellipse at 50% 40%, rgba(207,218,245,0.28), rgba(167,252,205,0.12) 48%, transparent 72%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-content {
+  position: relative;
+}
+
+/* ─── Section entrance transitions (no-JS fallback) ─── */
+.origin-section,
+.projects-section,
+.process-section,
+.service-section,
+.contact-section {
+  position: relative;
+}
+
+/* ─── Project card parallax indicator ─── */
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-lavender-mist), transparent);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.project-card:hover::after,
+.project-card.is-active::after {
+  opacity: 1;
+}
+
+/* ─── Nav scroll shadow ─── */
+.site-header {
+  transition: box-shadow 280ms ease;
+}
+
+.site-header.has-scrolled {
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+
+/* ─── Cursor trail dot (desktop only) ─── */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-ink-black);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+  mix-blend-mode: difference;
+  transition: transform 80ms ease, opacity 200ms ease;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce), (max-width: 1023px) {
+  .cursor-dot {
+    display: none !important;
+  }
+}
+
+/* Page entrance handled by GSAP hero flow motion */
+
 /* Responsive type scale */
 @media (min-width: 620px) {
   .hero-title {

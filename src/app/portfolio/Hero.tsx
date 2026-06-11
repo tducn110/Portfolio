@@ -74,16 +74,16 @@ export function Hero() {
         </p>
         <h1 className="hero-title" data-motion={motionAttr("hero-title")}>
           <span className="line" data-motion={motionAttr("hero-title-line")}>
-            I turn rough ideas into
+            I shape rough ideas into
           </span>
           <span className="line" data-motion={motionAttr("hero-title-line")}>
-            usable full-stack products.
+            products people can use.
           </span>
         </h1>
         <p className="hero-copy" data-motion={motionAttr("hero-copy")}>
-          I'm Nguyen Tam Duc, a Computer Science and Engineering student from Da
-          Nang. I build web products, portfolio websites, emotional digital
-          experiences, and early game-inspired prototypes.
+          I'm Nguyen Tam Duc — a Computer Science and Engineering student from
+          Da Nang. I may not know everything deeply at first, but I start moving
+          early, learn fast, adapt, and build until the product works.
         </p>
         <div className="hero-actions">
           <button

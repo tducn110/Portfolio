@@ -67,7 +67,7 @@ export function useStoryReveal<T extends HTMLElement = HTMLDivElement>(
     const ctx = gsap.context(() => {
       gsap.fromTo(
         children,
-        { y: 18, opacity: 0 },
+        { y: 18, opacity: 0.72 },
         {
           y: 0,
           opacity: 1,

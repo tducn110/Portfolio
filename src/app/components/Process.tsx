@@ -60,7 +60,7 @@ export function Process() {
 
       gsap.fromTo(
         cards,
-        { opacity: 0, x: -12 },
+        { opacity: 0.72, x: -12 },
         {
           opacity: 1,
           x: 0,

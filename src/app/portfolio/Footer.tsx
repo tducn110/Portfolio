@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="footer-shell">
       <div>
         <strong>Nguyen Tam Duc</strong>
-        <p>CSE student, full-stack product builder, and AI-assisted developer.</p>
+        <p>CSE student and early-stage product builder. I start moving when projects begin.</p>
       </div>
       <div className="footer-links">
         {navLinks.map((link) => (

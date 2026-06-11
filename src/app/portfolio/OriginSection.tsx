@@ -39,8 +39,8 @@ export function OriginSection() {
     <section id="origin" className="section-shell origin-section">
       <SectionHeader
         eyebrow="Origin"
-        title="A portfolio built like a technical journal."
-        body="Quiet typography, clear proof, and enough motion to show how a rough idea becomes a shipped product."
+        title="Everyone has a strength. I help make it visible."
+        body="I started with small, real projects — not to show off, but to learn how a rough idea becomes a shipped product. That mindset carries into everything I build."
       />
 
       <div className="origin-grid">
@@ -49,7 +49,7 @@ export function OriginSection() {
         ))}
       </div>
 
-      <div className="capability-strip reveal" data-motion={motionAttr("reveal")}>
+      <div className="capability-strip reveal" data-motion={motionAttr("reveal", "parallax-h")} data-parallax-dir="left">
         {capabilities.map((capability) => (
           <span key={capability}>{capability}</span>
         ))}

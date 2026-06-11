@@ -32,10 +32,12 @@ function setReducedMotionState(root: HTMLElement) {
       motion("processor"),
       motion("media-frame"),
       motion("project-card"),
+      motion("parallax-h"),
     ].join(", "),
     {
       opacity: 1,
       y: 0,
+      x: 0,
       scale: 1,
     },
   );
@@ -158,6 +160,78 @@ function initMediaParallax() {
   });
 }
 
+function initHorizontalParallax() {
+  gsap.utils.toArray<HTMLElement>(motion("parallax-h")).forEach((element) => {
+    const direction = element.dataset.parallaxDir === "right" ? 60 : -60;
+    gsap.fromTo(
+      element,
+      { x: direction },
+      {
+        x: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: element,
+          start: "top bottom",
+          end: "top 30%",
+          scrub: 0.6,
+        },
+      },
+    );
+  });
+}
+
+function initSectionParallax() {
+  const sections = gsap.utils.toArray<HTMLElement>(".section-shell");
+  sections.forEach((section) => {
+    const cards = section.querySelectorAll<HTMLElement>(
+      ".feature-card, .service-card, .contact-copy, .contact-panel"
+    );
+    if (!cards.length) return;
+
+    gsap.fromTo(
+      cards,
+      { y: 30 },
+      {
+        y: 0,
+        stagger: 0.08,
+        ease: "power2.out",
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 78%",
+        },
+      },
+    );
+  });
+}
+
+function initHeroParallaxDepth() {
+  const heroSection = document.querySelector(".hero-section");
+  if (!heroSection) return;
+
+  gsap.to(".hero-facts", {
+    y: -14,
+    ease: "none",
+    scrollTrigger: {
+      trigger: heroSection,
+      start: "top top",
+      end: "bottom top",
+      scrub: 0.5,
+    },
+  });
+
+  gsap.to(".data-flow", {
+    y: -20,
+    ease: "none",
+    scrollTrigger: {
+      trigger: heroSection,
+      start: "top top",
+      end: "bottom top",
+      scrub: 0.4,
+    },
+  });
+}
+
 function initProcessMotion() {
   const processPanel = document.querySelector<HTMLElement>(motion("process-panel"));
   const processSteps = gsap.utils.toArray<HTMLElement>(motion("process-step"));
@@ -218,10 +292,88 @@ function initProjectMotion() {
   });
 }
 
+function initNavScrollShadow() {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  if (!header) return;
+
+  const handleScroll = () => {
+    header.classList.toggle("has-scrolled", window.scrollY > 10);
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}
+
+function initCursorDot() {
+  if (
+    isNarrowViewport() ||
+    window.matchMedia("(hover: none)").matches ||
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
+  const dot = document.createElement("div");
+  dot.className = "cursor-dot";
+  document.body.appendChild(dot);
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let dotX = 0;
+  let dotY = 0;
+
+  const handleMove = (event: MouseEvent) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  };
+
+  window.addEventListener("mousemove", handleMove, { passive: true });
+
+  const tick = () => {
+    dotX += (mouseX - dotX) * 0.15;
+    dotY += (mouseY - dotY) * 0.15;
+    dot.style.transform = `translate(${dotX - 4}px, ${dotY - 4}px)`;
+    requestAnimationFrame(tick);
+  };
+
+  requestAnimationFrame(tick);
+
+  return () => {
+    window.removeEventListener("mousemove", handleMove);
+    dot.remove();
+  };
+}
+
+function initCapabilityStripScroll() {
+  const strip = document.querySelector<HTMLElement>(".capability-strip");
+  if (!strip || isNarrowViewport()) return;
+
+  gsap.fromTo(
+    strip.children,
+    { x: 30, opacity: 0.72 },
+    {
+      x: 0,
+      opacity: 1,
+      stagger: 0.06,
+      duration: 0.5,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: strip,
+        start: "top 85%",
+      },
+    },
+  );
+}
+
 export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
   useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+
+    const cleanups: Array<(() => void) | undefined> = [];
 
     const ctx = gsap.context(() => {
       if (prefersReducedMotion()) {
@@ -232,10 +384,19 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
       initHeroFlowMotion();
       initRevealMotion();
       initMediaParallax();
+      initHorizontalParallax();
+      initSectionParallax();
+      initHeroParallaxDepth();
       initProcessMotion();
       initProjectMotion();
+      initCapabilityStripScroll();
+      cleanups.push(initNavScrollShadow());
+      cleanups.push(initCursorDot());
     }, root);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      cleanups.forEach((fn) => fn?.());
+    };
   }, [rootRef]);
 }

@@ -10,6 +10,7 @@ import { OriginSection } from "./portfolio/OriginSection";
 import { ProcessSection } from "./portfolio/ProcessSection";
 import { ProjectsSection } from "./portfolio/ProjectsSection";
 import { ServiceSection } from "./portfolio/ServiceSection";
+import { ThreeBackgroundLoader } from "./portfolio/ThreeBackgroundLoader";
 
 export default function App() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,7 @@ export default function App() {
 
   return (
     <div ref={rootRef} className="portfolio-root" style={{ backgroundColor: C.parchment }}>
+      <ThreeBackgroundLoader />
       <Nav />
       <main>
         <Hero />
