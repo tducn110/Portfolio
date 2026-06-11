@@ -18,11 +18,13 @@ export type BuildCard = {
 export type Project = {
   name: string;
   type: string;
-  mediaKey: "financeTracker" | "unsaidWords" | "pingball" | "gamePrototype";
+  mediaKey: "financeTracker" | "unsaidWords" | "pingball" | "gamePrototype" | "fontOfIntent";
   problem: string;
   solution: string;
   role: string;
   stack: string;
+  themeColor?: string;
+  link?: string;
 };
 
 export type ProcessStep = {
@@ -100,6 +102,17 @@ export const capabilities = [
 
 export const projects: Project[] = [
   {
+    name: "Font of Intent",
+    type: "Vercel Project",
+    mediaKey: "fontOfIntent",
+    problem: "When building modern web apps, managing custom fonts and layout intent across components can become messy and fragmented.",
+    solution: "A streamlined approach to applying intent-based typography, deployed via Vercel for instant preview and performance.",
+    role: "Developer",
+    stack: "React, Next.js, Vercel, Typography Systems",
+    themeColor: "220 10% 40%", /* slate/gray */
+    link: "https://github.com/tducn110/Font-of-Intent",
+  },
+  {
     name: "Finance Tracker V3",
     type: "Budget-first finance app",
     mediaKey: "financeTracker",
@@ -109,6 +122,8 @@ export const projects: Project[] = [
       "Budgets, wallets, recurring bills, savings goals, analytics, and AI Quick Add connect into one planning-first money system.",
     role: "Team lead, backend, database, architecture",
     stack: "Next.js, TypeScript, Hono, Zod, Supabase PostgreSQL, Drizzle, Turborepo",
+    themeColor: "160 60% 40%", /* green/mint */
+    link: "https://finance-for-me-local.vercel.app",
   },
   {
     name: "Unsaid Words, Shared Hearts",
@@ -120,6 +135,8 @@ export const projects: Project[] = [
       "Notes, comfort replies, and supporter moderation create a controlled public wall for emotional expression without judgment.",
     role: "Creator, product flow, frontend, Supabase data layer",
     stack: "React, Supabase, Postgres, RPC flows, moderation states",
+    themeColor: "260 50% 60%", /* lavender/purple */
+    link: "https://unsaidwords.vercel.app",
   },
   {
     name: "PingBall Landing Page",
@@ -128,9 +145,11 @@ export const projects: Project[] = [
     problem:
       "A tournament needs clear registration, schedule, rules, and trust — without overloading visitors with noise.",
     solution:
-      "A direct event landing page organizes tournament details into a simple path from interest to signup.",
-    role: "Frontend developer and layout planner",
-    stack: "React, responsive layout, event information architecture",
+      "A fast, readable layout that respects the user's time. Clear hierarchy, rules section, and a simple registration flow.",
+    role: "Frontend logic, structure, styling",
+    stack: "React, responsive design patterns",
+    themeColor: "25 80% 50%", /* orange */
+    link: "https://pingball.vercel.app",
   },
   {
     name: "First Game Prototype",
@@ -139,9 +158,10 @@ export const projects: Project[] = [
     problem:
       "Game interfaces need fast feedback, clear states, and interaction rules that feel learnable — not just functional.",
     solution:
-      "A small prototype explored shaders, HLSL, C#, and interaction loops as a way to understand game feel and player response.",
-    role: "Prototype builder",
-    stack: "C#, HLSL, shader experiments, interaction systems",
+      "A basic system that loads assets, runs a game loop, and handles collisions in the browser.",
+    role: "Game loop, canvas rendering, collision math",
+    stack: "HTML Canvas, Vanilla JS, RequestAnimationFrame",
+    themeColor: "350 60% 50%", /* red */
   },
 ];
 

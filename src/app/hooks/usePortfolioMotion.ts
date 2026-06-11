@@ -366,6 +366,57 @@ function initCapabilityStripScroll() {
     },
   );
 }
+function initDynamicThemeMotion() {
+  const cards = gsap.utils.toArray<HTMLElement>(".project-card");
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    const themeColor = card.dataset.themeColor;
+    if (!themeColor) return;
+
+    ScrollTrigger.create({
+      trigger: card,
+      start: "top 60%",
+      end: "bottom 40%",
+      onEnter: () => applyTheme(themeColor),
+      onEnterBack: () => applyTheme(themeColor),
+    });
+  });
+
+  const projectsSection = document.querySelector(".projects-section");
+  if (projectsSection) {
+    ScrollTrigger.create({
+      trigger: projectsSection,
+      start: "top bottom",
+      end: "top 60%",
+      onLeaveBack: () => resetTheme(),
+    });
+    ScrollTrigger.create({
+      trigger: projectsSection,
+      start: "bottom 40%",
+      end: "bottom top",
+      onLeave: () => resetTheme(),
+    });
+  }
+
+  function applyTheme(hsl: string) {
+    gsap.to(document.documentElement, {
+      "--color-lavender-mist": `hsl(${hsl})`,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+    document.documentElement.classList.add("has-dynamic-theme");
+  }
+
+  function resetTheme() {
+    gsap.to(document.documentElement, {
+      "--color-lavender-mist": "#cfdaf5", // Original lavender mist
+      duration: 0.8,
+      ease: "power2.out",
+    });
+    document.documentElement.classList.remove("has-dynamic-theme");
+  }
+}
 
 export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
   useLayoutEffect(() => {
@@ -389,6 +440,7 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
       initProcessMotion();
       initProjectMotion();
       initCapabilityStripScroll();
+      initDynamicThemeMotion();
       cleanups.push(initNavScrollShadow());
       cleanups.push(initCursorDot());
     }, root);

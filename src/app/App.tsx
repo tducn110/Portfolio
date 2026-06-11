@@ -19,6 +19,7 @@ export default function App() {
 
   return (
     <div ref={rootRef} className="portfolio-root" style={{ backgroundColor: C.parchment }}>
+      <div className="theme-tint-overlay" />
       <BootScreen />
       <ThreeBackgroundLoader />
       <Nav />

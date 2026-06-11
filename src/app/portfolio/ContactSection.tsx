@@ -16,9 +16,9 @@ export function ContactSection() {
         </div>
 
         <div className="contact-panel reveal" data-motion={motionAttr("reveal")}>
-          <a href="mailto:nguyentamduc.dev@gmail.com">
+          <a href="mailto:n.tduc011006dn@gmail.com">
             <Mail aria-hidden size={18} strokeWidth={1.5} />
-            nguyentamduc.dev@gmail.com
+            n.tduc011006dn@gmail.com
             <Send aria-hidden size={15} strokeWidth={1.5} />
           </a>
           <a href="https://github.com/tducn110" target="_blank" rel="noreferrer">

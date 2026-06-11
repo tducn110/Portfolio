@@ -53,6 +53,13 @@ export function Nav() {
         </div>
 
         <div className="nav-actions">
+          <button 
+            className="button button-ghost" 
+            style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.05em' }}
+            onClick={() => window.dispatchEvent(new Event("open-menu"))}
+          >
+            [ MENU ]
+          </button>
           <a
             className="button button-ghost"
             href="https://github.com/tducn110"

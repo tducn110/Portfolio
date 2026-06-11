@@ -9,11 +9,19 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       className="project-card reveal"
       data-motion={motionAttr("project-card", "reveal")}
       data-project-index={index}
+      data-theme-color={project.themeColor}
     >
       <div className="project-index">{String(index + 1).padStart(2, "0")}</div>
       <div className="project-main">
         <p>{project.type}</p>
-        <h3>{project.name}</h3>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+          <h3>{project.name}</h3>
+          {project.link && (
+            <a href={project.link} target="_blank" rel="noreferrer" className="project-link" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', padding: '4px 8px', border: '1px solid var(--color-ink-black)', borderRadius: '999px', textDecoration: 'none', color: 'inherit' }}>
+              View Source ↗
+            </a>
+          )}
+        </div>
       </div>
       <div className="project-notes">
         <div>

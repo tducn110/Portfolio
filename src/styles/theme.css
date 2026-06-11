@@ -754,6 +754,27 @@ a:focus-visible {
   color: var(--color-ink-black);
 }
 
+.portfolio-root {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-tint-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-color: var(--color-lavender-mist);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  mix-blend-mode: multiply;
+}
+
+.has-dynamic-theme .theme-tint-overlay {
+  opacity: 0.08;
+}
+
 .generated-proof::before {
   content: "";
   position: absolute;
@@ -1688,9 +1709,9 @@ a:focus-visible {
 .boot-content {
   position: relative;
   z-index: 1;
-  width: calc(100% - 48px);
-  max-width: 640px;
-  padding: 40px;
+  width: calc(100% - 64px);
+  max-width: 840px;
+  padding: 64px;
   border: 1px solid rgba(0,0,0,0.15);
   background: var(--color-parchment-cream);
   box-shadow: 0 4px 24px rgba(0,0,0,0.04);
@@ -1729,16 +1750,16 @@ a:focus-visible {
 }
 
 .boot-main h1 {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 300;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   letter-spacing: -0.5px;
 }
 
 .boot-subtitle {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--color-steel);
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .boot-flow {
@@ -1746,9 +1767,9 @@ a:focus-visible {
   align-items: center;
   gap: 12px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--color-graphite);
-  margin-bottom: 48px;
+  margin-bottom: 64px;
 }
 
 .boot-flow-arrow {
@@ -1773,14 +1794,14 @@ a:focus-visible {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
 }
 
 .boot-modules li {
   display: flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 14px;
   color: var(--color-graphite);
 }
 
@@ -1804,7 +1825,7 @@ a:focus-visible {
 
 .boot-module-state {
   color: var(--color-steel);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .boot-modules li.is-ready .boot-module-state {
@@ -1814,7 +1835,7 @@ a:focus-visible {
 .boot-modules li.is-clickable {
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 4px 0;
+  padding: 8px 0;
 }
 
 .boot-modules li.is-clickable:hover {

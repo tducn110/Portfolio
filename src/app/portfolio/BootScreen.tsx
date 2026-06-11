@@ -58,6 +58,18 @@ export function BootScreen() {
   }, []);
 
   useEffect(() => {
+    const handleOpenMenu = () => {
+      setShouldShow(true);
+      setProgress(100);
+      setReadyCount(MODULES.length);
+      setIsReadyToEnter(true);
+      gsap.fromTo(".boot-screen", { opacity: 0 }, { opacity: 1, duration: 0.4 });
+    };
+    window.addEventListener("open-menu", handleOpenMenu);
+    return () => window.removeEventListener("open-menu", handleOpenMenu);
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Enter" && shouldShow) {
         completeBoot();
@@ -93,7 +105,9 @@ export function BootScreen() {
       
       <div className="boot-content">
         <div className="boot-header">
-          <div className="boot-badge">NTD / Nguyen Tam Duc</div>
+          <a href="https://www.instagram.com/tdu._cn/" target="_blank" rel="noreferrer" className="boot-badge" style={{ textDecoration: 'none', color: 'inherit' }}>
+            tdu._cn / Nguyen Tam Duc
+          </a>
           <button className="boot-skip" onClick={() => completeBoot()}>
             {isReadyToEnter ? "Enter Portfolio ↵" : "Skip Boot ↵"}
           </button>
