@@ -18,7 +18,7 @@ export function BootScreen() {
 
   useEffect(() => {
     // Check session storage
-    if (sessionStorage.getItem("portfolio_boot_seen_v1")) {
+    if (sessionStorage.getItem("portfolio_boot_seen_v2")) {
       return;
     }
     setShouldShow(true);
@@ -68,7 +68,7 @@ export function BootScreen() {
   }, [shouldShow]);
 
   const completeBoot = () => {
-    sessionStorage.setItem("portfolio_boot_seen_v1", "true");
+    sessionStorage.setItem("portfolio_boot_seen_v2", "true");
     
     gsap.to(".boot-screen", {
       opacity: 0,
