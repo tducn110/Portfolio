@@ -1811,6 +1811,26 @@ a:focus-visible {
   color: var(--color-graphite);
 }
 
+.boot-modules li.is-clickable {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 4px 0;
+}
+
+.boot-modules li.is-clickable:hover {
+  transform: translateX(6px);
+}
+
+.boot-modules li.is-clickable:hover .boot-module-status {
+  background: var(--color-ink-black);
+  box-shadow: none;
+}
+
+.boot-modules li.is-clickable:hover .boot-module-state {
+  color: var(--color-ink-black);
+  font-weight: 600;
+}
+
 .boot-progress-container {
   display: flex;
   align-items: center;

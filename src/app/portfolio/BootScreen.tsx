@@ -3,11 +3,11 @@ import gsap from "gsap";
 import { C, F, Sh } from "../tokens";
 
 const MODULES = [
-  "Origin",
-  "Projects",
-  "Process",
-  "Service",
-  "Contact",
+  { label: "Origin", id: "origin" },
+  { label: "Projects", id: "projects" },
+  { label: "Process", id: "process" },
+  { label: "Service", id: "services" },
+  { label: "Contact", id: "contact" },
 ];
 
 export function BootScreen() {
@@ -18,7 +18,7 @@ export function BootScreen() {
 
   useEffect(() => {
     // Check session storage
-    if (sessionStorage.getItem("portfolio_boot_seen_v2")) {
+    if (sessionStorage.getItem("portfolio_boot_seen_v4")) {
       return;
     }
     setShouldShow(true);
@@ -67,8 +67,8 @@ export function BootScreen() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [shouldShow]);
 
-  const completeBoot = () => {
-    sessionStorage.setItem("portfolio_boot_seen_v2", "true");
+  const completeBoot = (targetId?: string) => {
+    sessionStorage.setItem("portfolio_boot_seen_v4", "true");
     
     gsap.to(".boot-screen", {
       opacity: 0,
@@ -76,6 +76,11 @@ export function BootScreen() {
       ease: "power2.inOut",
       onComplete: () => {
         setShouldShow(false);
+        if (targetId) {
+          setTimeout(() => {
+            document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
+          }, 100);
+        }
       }
     });
   };
@@ -89,7 +94,7 @@ export function BootScreen() {
       <div className="boot-content">
         <div className="boot-header">
           <div className="boot-badge">NTD / Nguyen Tam Duc</div>
-          <button className="boot-skip" onClick={completeBoot}>
+          <button className="boot-skip" onClick={() => completeBoot()}>
             {isReadyToEnter ? "Enter Portfolio ↵" : "Skip Boot ↵"}
           </button>
         </div>
@@ -107,30 +112,39 @@ export function BootScreen() {
           </div>
 
           <div className="boot-modules">
-            <p className="boot-modules-title" style={{ fontFamily: F.mono }}>Loading modules</p>
+            <p className="boot-modules-title" style={{ fontFamily: F.mono }}>
+              {isReadyToEnter ? "Select Destination" : "Loading modules"}
+            </p>
             <ul>
-              {MODULES.map((mod, i) => (
-                <li key={mod} className={i < readyCount ? "is-ready" : "is-pending"}>
-                  <span className="boot-module-status" />
-                  <span className="boot-module-name">{mod}</span>
-                  <span className="boot-module-state">{i < readyCount ? "ready" : "pending"}</span>
-                </li>
-              ))}
+              {MODULES.map((mod, i) => {
+                const isReady = isReadyToEnter || i < readyCount;
+                return (
+                  <li 
+                    key={mod.label} 
+                    className={`${isReady ? "is-ready" : "is-pending"} ${isReadyToEnter ? "is-clickable" : ""}`}
+                    onClick={() => { if (isReadyToEnter) completeBoot(mod.id); }}
+                  >
+                    <span className="boot-module-status" />
+                    <span className="boot-module-name">{mod.label}</span>
+                    <span className="boot-module-state">{isReadyToEnter ? "ACCESS" : (isReady ? "ready" : "pending")}</span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          <div className="boot-progress-container">
-            <div className="boot-progress-bar">
-              <div className="boot-progress-fill" style={{ width: `${progress}%` }} />
+          {!isReadyToEnter ? (
+            <div className="boot-progress-container">
+              <div className="boot-progress-bar">
+                <div className="boot-progress-fill" style={{ width: `${progress}%` }} />
+              </div>
+              <span className="boot-progress-text" style={{ fontFamily: F.mono }}>
+                {Math.floor(progress)}%
+              </span>
             </div>
-            <span className="boot-progress-text" style={{ fontFamily: F.mono }}>
-              {Math.floor(progress)}%
-            </span>
-          </div>
-
-          {isReadyToEnter && (
-            <div className="boot-ready-prompt" onClick={completeBoot}>
-              Press Enter or Click to Start
+          ) : (
+            <div className="boot-ready-prompt" onClick={() => completeBoot()}>
+              Enter Portfolio Normally ↵
             </div>
           )}
         </div>
