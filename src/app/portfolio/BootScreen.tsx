@@ -14,6 +14,7 @@ export function BootScreen() {
   const [shouldShow, setShouldShow] = useState(false);
   const [progress, setProgress] = useState(0);
   const [readyCount, setReadyCount] = useState(0);
+  const [isReadyToEnter, setIsReadyToEnter] = useState(false);
 
   useEffect(() => {
     // Check session storage
@@ -27,6 +28,7 @@ export function BootScreen() {
     if (reduced) {
       setProgress(100);
       setReadyCount(MODULES.length);
+      setIsReadyToEnter(true);
       return;
     }
 
@@ -48,9 +50,7 @@ export function BootScreen() {
 
       if (currentProgress >= 100) {
         clearInterval(interval);
-        setTimeout(() => {
-          completeBoot();
-        }, 600);
+        setIsReadyToEnter(true);
       }
     }, 120);
 
@@ -89,7 +89,9 @@ export function BootScreen() {
       <div className="boot-content">
         <div className="boot-header">
           <div className="boot-badge">NTD / Nguyen Tam Duc</div>
-          <button className="boot-skip" onClick={completeBoot}>Enter Portfolio ↵</button>
+          <button className="boot-skip" onClick={completeBoot}>
+            {isReadyToEnter ? "Enter Portfolio ↵" : "Skip Boot ↵"}
+          </button>
         </div>
 
         <div className="boot-main">
@@ -125,6 +127,12 @@ export function BootScreen() {
               {Math.floor(progress)}%
             </span>
           </div>
+
+          {isReadyToEnter && (
+            <div className="boot-ready-prompt" onClick={completeBoot}>
+              Press Enter or Click to Start
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1840,6 +1840,23 @@ a:focus-visible {
   text-align: right;
 }
 
+.boot-ready-prompt {
+  margin-top: 40px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: center;
+  color: var(--color-ink-black);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  animation: prompt-blink 1.5s infinite;
+}
+
+@keyframes prompt-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
 /* ─── Cursor trail dot (desktop only) ─── */
 .cursor-dot {
   position: fixed;
