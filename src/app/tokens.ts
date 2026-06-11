@@ -1,34 +1,26 @@
 export const C = {
-  graphite: "#1d1d20",
-  slate: "#42424a",
-  iron: "#505050",
-  steel: "#757575",
-  smoke: "#92939e",
-  ash: "#e5e7eb",
-  mist: "#d1d9e4",
-  bone: "#f7f7f7",
-  fog: "#f1f1f1",
-  silver: "#efefef",
+  parchment: "#f6f3f1",
+  ink: "#000000",
+  charcoal: "#242424",
+  graphite: "#4e4d4d",
+  slate: "#3d3d3d",
+  stone: "#797776",
+  lavender: "#cfdaf5",
+  peach: "#ff9473",
+  periwinkle: "#a0b5eb",
+  mint: "#a7fccd",
+  amber: "#e2c161",
   white: "#ffffff",
-  violet: "#a565ff",
-  indigo: "#5e5cff",
-  lavender: "#ebebff",
-  iris: "#e0c9ff",
-  green: "#2e7317",
-  marble: "#fff6df",
 } as const;
 
 export const F = {
-  ui: "'Inter', ui-sans-serif, system-ui, sans-serif",
-  display: "'Cormorant Garamond', ui-serif, Georgia, serif",
-  mono: "'JetBrains Mono', ui-monospace, monospace",
+  serif: "'Source Serif 4', 'Lora', 'PT Serif', ui-serif, Georgia, serif",
+  mono:
+    "'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+  sans:
+    "'Untitled Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
 } as const;
 
 export const Sh = {
-  card: "rgba(29,29,32,0.08) 0px 0px 0px 1px",
-  primaryCta:
-    "0px 0px 0px 1px rgba(58,58,64,0.1), 0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px -1px rgba(0,0,0,0.1), 0px 0px 10px 3px rgba(224,201,255,0.5)",
-  secondaryCta: "rgba(29,29,32,0.08) 0px 0px 0px 1px",
-  screenshot:
-    "rgb(239,239,239) 0px 0px 0px 2px, rgba(0,0,0,0.01) 0px 22px 9px 0px, rgba(0,0,0,0.04) 0px 12px 7px 0px, rgba(0,0,0,0.06) 0px 5px 5px 0px, rgba(0,0,0,0.07) 0px 1px 3px 0px",
+  ambient: "rgba(0, 0, 0, 0.1) 0px 0px 10px 0px",
 } as const;
