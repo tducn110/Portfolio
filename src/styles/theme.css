@@ -2,7 +2,7 @@
 
 :root {
   --color-parchment-cream: #f6f3f1;
-  --color-ink-black: #000000;
+  --color-ink-black: #111111;
   --color-charcoal: #242424;
   --color-graphite: #4e4d4d;
   --color-slate-shadow: #3d3d3d;
@@ -14,7 +14,7 @@
   --color-amber-wash: #e2c161;
   --font-untitled-serif: 'Source Serif 4', 'Lora', 'PT Serif', ui-serif, Georgia, serif;
   --font-abc-diatype-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-untitled-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-untitled-sans: 'Outfit', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --text-caption: 12px;
   --text-body-sm: 14px;
   --text-body: 16px;
@@ -34,7 +34,7 @@
   --radius-cards: 40px;
   --radius-buttons: 100px;
   --radius-inputs: 8px;
-  --shadow-md: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+  --shadow-md: rgba(17, 17, 17, 0.08) 0px 8px 24px -4px, rgba(17, 17, 17, 0.04) 0px 4px 8px -2px;
 
   --background: var(--color-parchment-cream);
   --foreground: var(--color-ink-black);
@@ -125,8 +125,8 @@ body {
   margin: 0;
   background: var(--color-parchment-cream);
   color: var(--color-ink-black);
-  font-family: var(--font-abc-diatype-mono);
-  line-height: 1.35;
+  font-family: var(--font-untitled-sans);
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -314,19 +314,24 @@ a:focus-visible {
   line-height: 1.2;
   cursor: pointer;
   transition:
-    transform 180ms ease,
-    background 180ms ease,
-    color 180ms ease;
+    transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background 300ms ease,
+    color 300ms ease;
 }
 
 .button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .button-filled {
   border: 1px solid var(--color-charcoal);
   background: var(--color-charcoal);
   color: var(--color-parchment-cream);
+  box-shadow: var(--shadow-md);
 }
 
 .button-ghost,

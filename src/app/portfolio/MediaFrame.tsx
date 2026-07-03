@@ -21,9 +21,11 @@ function usePrefersReducedMotion() {
 export function MediaFrame({
   media,
   className = "",
+  priority = false,
 }: {
   media?: PortfolioMedia;
   className?: string;
+  priority?: boolean;
 }) {
   const [mediaFailed, setMediaFailed] = useState(false);
   const [posterFailed, setPosterFailed] = useState(false);
@@ -99,6 +101,8 @@ export function MediaFrame({
         <img
           src={media.type === "image" ? media.src : posterOrImage}
           alt={media.alt}
+          loading={priority ? undefined : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           onLoad={() => setReady(true)}
           onError={() => {
             if (media.type === "video" || media.type === "iframe") {
