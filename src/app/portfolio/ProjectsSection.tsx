@@ -83,10 +83,6 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <p>{project.stack}</p>
         </div>
       </div>
-      <MediaFrame
-        media={portfolioMedia.projects[project.mediaKey]}
-        className={`project-media media-${project.mediaKey}`}
-      />
     </article>
   );
 }

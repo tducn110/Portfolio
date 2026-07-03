@@ -442,6 +442,7 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
       initProcessMotion();
       initProjectMotion();
       initCapabilityStripScroll();
+      initDynamicThemeMotion();
       cleanups.push(initNavScrollShadow());
       cleanups.push(initCursorDot());
     }, root);

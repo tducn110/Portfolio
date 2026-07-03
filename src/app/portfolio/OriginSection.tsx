@@ -29,7 +29,6 @@ function FeatureCard({ card, wide }: { card: BuildCard; wide?: boolean }) {
         <h3>{card.title}</h3>
         <p>{card.body}</p>
       </div>
-      <MediaFrame media={portfolioMedia[card.mediaKey]} className="feature-media" />
     </article>
   );
 }

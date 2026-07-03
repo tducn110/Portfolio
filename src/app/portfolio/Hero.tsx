@@ -124,7 +124,6 @@ export function Hero() {
         </div>
       </div>
 
-      <MediaFrame media={portfolioMedia.hero} className="hero-media reveal" priority />
       <DataFlowDiagram />
 
       <div className="hero-facts reveal" data-motion={motionAttr("reveal")}>
