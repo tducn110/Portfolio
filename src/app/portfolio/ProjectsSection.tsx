@@ -1,6 +1,4 @@
 import { projectPipeline, Project, projects } from "../content/portfolioContent";
-import { portfolioMedia } from "../content/portfolioMedia";
-import { MediaFrame } from "./MediaFrame";
 import { motionAttr, SectionHeader } from "./shared";
 
 function ProjectAtlasStrip() {

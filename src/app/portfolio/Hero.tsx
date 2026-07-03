@@ -5,8 +5,6 @@ import {
   heroContent,
   sourceTags,
 } from "../content/portfolioContent";
-import { portfolioMedia } from "../content/portfolioMedia";
-import { MediaFrame } from "./MediaFrame";
 import { ButtonArrow, motionAttr, scrollToTarget } from "./shared";
 
 function Tag({ label, side }: { label: string; side: "source" | "destination" }) {

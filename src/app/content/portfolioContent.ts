@@ -12,13 +12,11 @@ export type BuildCard = {
   icon: "layers" | "database" | "pen";
   title: string;
   body: string;
-  mediaKey: "origin" | "systemThinking" | "storyStructure";
 };
 
 export type Project = {
   name: string;
   type: string;
-  mediaKey: "financeTracker" | "unsaidWords" | "pingball" | "gamePrototype" | "fontOfIntent";
   problem: string;
   solution: string;
   role: string;
@@ -79,19 +77,16 @@ export const buildCards: BuildCard[] = [
     icon: "layers",
     title: "Origin",
     body: "I started with small, real projects — a student event landing page, an anonymous support wall, a finance tool, and an early game prototype. The point was never polish first. It was learning how to turn uncertainty into a working first version, then improving from there.",
-    mediaKey: "origin",
   },
   {
     icon: "database",
     title: "System Thinking",
     body: "A usable product needs more than a screen. I think through user flow, schema design, API structure, validation, testing, deployment, and the refactor that makes the next version easier. Every layer connects.",
-    mediaKey: "systemThinking",
   },
   {
     icon: "pen",
     title: "Story And Structure",
     body: "I believe everyone has their own strength. A good portfolio should make those strengths visible — showing progress, decisions, projects, and the kind of problems a person can solve. That's why I build them.",
-    mediaKey: "storyStructure",
   },
 ];
 
@@ -108,7 +103,6 @@ export const projects: Project[] = [
   {
     name: "Font of Intent",
     type: "Vercel Project",
-    mediaKey: "fontOfIntent",
     problem: "When building modern web apps, managing custom fonts and layout intent across components can become messy and fragmented.",
     solution: "A streamlined approach to applying intent-based typography, deployed via Vercel for instant preview and performance.",
     role: "Developer",
@@ -120,7 +114,6 @@ export const projects: Project[] = [
   {
     name: "Finance Tracker V3",
     type: "Budget-first finance app",
-    mediaKey: "financeTracker",
     problem:
       "Most expense trackers record what already happened. This project asks what is safe to spend before the transaction happens.",
     solution:
@@ -134,7 +127,6 @@ export const projects: Project[] = [
   {
     name: "Unsaid Words, Shared Hearts",
     type: "Anonymous support wall",
-    mediaKey: "unsaidWords",
     problem:
       "Some thoughts are hard to say out loud. The experience needed to feel quiet, anonymous, and protected — a safe place to let words exist.",
     solution:
@@ -148,7 +140,6 @@ export const projects: Project[] = [
   {
     name: "PingBall Landing Page",
     type: "Student event page",
-    mediaKey: "pingball",
     problem:
       "A tournament needs clear registration, schedule, rules, and trust — without overloading visitors with noise.",
     solution:
@@ -162,7 +153,6 @@ export const projects: Project[] = [
   {
     name: "First Game Prototype",
     type: "Interaction experiment",
-    mediaKey: "gamePrototype",
     problem:
       "Game interfaces need fast feedback, clear states, and interaction rules that feel learnable — not just functional.",
     solution:
@@ -365,66 +355,3 @@ export const footerContent = {
   body: "CSE student and early-stage product builder. I start moving when projects begin.",
 } as const;
 
-export const generatedProofContent = {
-  variantTitles: {
-    "hero-flow": "Idea to shipped product",
-    "system-map": "Flow / API / data / tests",
-    "story-structure": "Before and after structure",
-    "finance-dashboard": "Budget-first money system",
-    "support-wall": "Anonymous support wall",
-    "event-landing": "Event landing path",
-    "game-interface": "Prototype interface loop",
-    "service-proof": "Portfolio service proof",
-    "font-of-intent": "Font of Intent system",
-  },
-  heroFlow: {
-    sourcePills: ["rough idea", "user story", "schema"],
-    processorLabel: "normalize",
-    processorMeta: "route / refactor",
-    destinationPills: ["full-stack app", "portfolio site", "event launch"],
-  },
-  systemMap: {
-    nodes: ["user flow", "API", "database", "validation", "tests", "deploy"],
-  },
-  storyStructure: {
-    beforeLabel: "before",
-    afterLabel: "after",
-  },
-  financeDashboard: {
-    availableLabel: "available",
-    amount: "$842",
-    bars: ["rent", "food", "savings"],
-    chip: "AI quick add: coffee 4.50",
-  },
-  supportWall: {
-    note: "I needed to say this somewhere.",
-    reply: "reply: you are not alone",
-    queueLabel: "moderation",
-  },
-  eventLanding: {
-    title: "PingBall",
-    ctaLabel: "register",
-    grid: ["rules", "schedule", "teams", "venue"],
-  },
-  gameInterface: {
-    hpLabel: "HP 82",
-    shaderLabel: "shader pass",
-    dialog: "input - feedback - loop",
-  },
-  serviceProof: {
-    beforeLabel: "audit",
-    afterLabel: "ship",
-    checklist: ["clear story", "project proof", "responsive handoff"],
-  },
-  fontOfIntent: {
-    wordmark: "font of intent",
-    titleLines: ["your words reveal", "what your fingers felt"],
-    subtitleLines: [
-      "a letter that proves you were here.",
-      "not generated. not autocompleted. yours.",
-    ],
-    cardStrong: "Dear you,",
-    cardMid: "I started this letter three t",
-    ctaLabel: "Write Your Letter →",
-  },
-} as const;

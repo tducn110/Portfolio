@@ -4,8 +4,6 @@ import {
   buildCards,
   capabilities,
 } from "../content/portfolioContent";
-import { portfolioMedia } from "../content/portfolioMedia";
-import { MediaFrame } from "./MediaFrame";
 import { motionAttr, SectionHeader } from "./shared";
 
 const featureIcons = {
