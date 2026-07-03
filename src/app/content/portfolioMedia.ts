@@ -1,7 +1,7 @@
 import type { GeneratedProofVariant } from "../portfolio/GeneratedProof";
 
 export type PortfolioMedia = {
-  type: "image" | "video";
+  type: "image" | "video" | "iframe";
   src?: string;
   sources?: Array<{
     src: string;
@@ -16,45 +16,44 @@ export type PortfolioMedia = {
 export const portfolioMedia = {
   hero: {
     type: "video",
-    src: "/media/portfolio/hero-loop.webm",
-    sources: [
-      { src: "/media/portfolio/hero-loop.webm", type: "video/webm" },
-      { src: "/media/portfolio/hero-loop.mp4", type: "video/mp4" },
-    ],
-    poster: "/media/portfolio/hero-poster.png",
     alt: "Portfolio product workflow preview",
     label: "Product workflow preview",
     generatedVariant: "hero-flow",
   },
   origin: {
     type: "image",
-    src: "/media/portfolio/origin-projects.png",
     alt: "Early student projects and product experiments",
     label: "Early projects",
     generatedVariant: "story-structure",
   },
   systemThinking: {
     type: "image",
-    src: "/media/portfolio/system-thinking-diagram.png",
     alt: "User flow, API structure, database and testing diagram",
     label: "System thinking map",
     generatedVariant: "system-map",
   },
   storyStructure: {
     type: "image",
-    src: "/media/portfolio/story-structure.png",
     alt: "Before and after portfolio story structure preview",
     label: "Story structure proof",
     generatedVariant: "story-structure",
   },
   service: {
     type: "image",
-    src: "/media/portfolio/service-proof.png",
     alt: "Portfolio service proof and before-after structure",
     label: "Portfolio proof system",
     generatedVariant: "service-proof",
   },
   projects: {
+    fontOfIntent: {
+      type: "video",
+      src: "/media/portfolio/font-of-intent-loop.webm",
+      sources: [{ src: "/media/portfolio/font-of-intent-loop.webm", type: "video/webm" }],
+      poster: "/media/portfolio/font-of-intent-poster.png",
+      alt: "Font of Intent project preview",
+      label: "Font of Intent system",
+      generatedVariant: "font-of-intent",
+    },
     financeTracker: {
       type: "image",
       src: "/media/portfolio/finance-tracker-poster.png",
@@ -78,7 +77,6 @@ export const portfolioMedia = {
     },
     gamePrototype: {
       type: "image",
-      src: "/media/portfolio/game-prototype-poster.png",
       alt: "First game prototype interface preview",
       label: "Game prototype",
       generatedVariant: "game-interface",

@@ -4,7 +4,25 @@ Generated HTML/CSS proof visuals are the current fallback for every media slot.
 Real assets can be added later without changing section components because
 `src/app/content/portfolioMedia.ts` already owns the paths and fallback variants.
 
+## Current Registry Status
+
+The registry has been normalized to avoid known missing public media references.
+Slots without real assets intentionally omit `src`, `sources`, and `poster` so
+`MediaFrame` renders the configured `GeneratedProof` fallback without failed
+media requests.
+
+Currently wired real assets:
+
+- `/media/portfolio/font-of-intent-loop.webm`
+- `/media/portfolio/font-of-intent-poster.png`
+- `/media/portfolio/finance-tracker-poster.png`
+- `/media/portfolio/unsaid-words-poster.png`
+- `/media/portfolio/pingball-poster.png`
+
 ## Expected Files
+
+These files are still useful future replacements, but they are not all
+referenced by `portfolioMedia.ts` yet.
 
 | Path | Type | Where Used | Recommended Content |
 | --- | --- | --- | --- |

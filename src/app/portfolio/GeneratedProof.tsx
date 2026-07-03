@@ -1,3 +1,6 @@
+import type { CSSProperties } from "react";
+import { generatedProofContent } from "../content/portfolioContent";
+
 export type GeneratedProofVariant =
   | "hero-flow"
   | "system-map"
@@ -6,23 +9,18 @@ export type GeneratedProofVariant =
   | "support-wall"
   | "event-landing"
   | "game-interface"
-  | "service-proof";
+  | "service-proof"
+  | "font-of-intent";
 
 type GeneratedProofProps = {
   variant: GeneratedProofVariant;
   label?: string;
 };
 
-const variantTitles = {
-  "hero-flow": "Idea to shipped product",
-  "system-map": "Flow / API / data / tests",
-  "story-structure": "Before and after structure",
-  "finance-dashboard": "Budget-first money system",
-  "support-wall": "Anonymous support wall",
-  "event-landing": "Event landing path",
-  "game-interface": "Prototype interface loop",
-  "service-proof": "Portfolio service proof",
-} satisfies Record<GeneratedProofVariant, string>;
+const variantTitles = generatedProofContent.variantTitles satisfies Record<
+  GeneratedProofVariant,
+  string
+>;
 
 function FlowPill({ children, active = false }: { children: string; active?: boolean }) {
   return <span className={`proof-pill ${active ? "is-active" : ""}`}>{children}</span>;
@@ -33,36 +31,40 @@ function StatusDot({ delay = "0s" }: { delay?: string }) {
 }
 
 function HeroFlowProof() {
+  const content = generatedProofContent.heroFlow;
+
   return (
     <div className="proof-hero-flow">
       <div className="proof-flow-column">
-        <FlowPill>rough idea</FlowPill>
-        <FlowPill>user story</FlowPill>
-        <FlowPill>schema</FlowPill>
+        {content.sourcePills.map((pill) => (
+          <FlowPill key={pill}>{pill}</FlowPill>
+        ))}
       </div>
       <div className="proof-flow-rail" aria-hidden>
         <StatusDot />
         <StatusDot delay="1.2s" />
       </div>
       <div className="proof-processor-node">
-        <span>normalize</span>
-        <small>route / refactor</small>
+        <span>{content.processorLabel}</span>
+        <small>{content.processorMeta}</small>
       </div>
       <div className="proof-flow-rail" aria-hidden>
         <StatusDot delay=".6s" />
         <StatusDot delay="1.8s" />
       </div>
       <div className="proof-flow-column">
-        <FlowPill active>full-stack app</FlowPill>
-        <FlowPill>portfolio site</FlowPill>
-        <FlowPill>event launch</FlowPill>
+        {content.destinationPills.map((pill, index) => (
+          <FlowPill key={pill} active={index === 0}>
+            {pill}
+          </FlowPill>
+        ))}
       </div>
     </div>
   );
 }
 
 function SystemMapProof() {
-  const nodes = ["user flow", "API", "database", "validation", "tests", "deploy"];
+  const { nodes } = generatedProofContent.systemMap;
 
   return (
     <div className="proof-system-map">
@@ -80,10 +82,12 @@ function SystemMapProof() {
 }
 
 function StoryStructureProof() {
+  const content = generatedProofContent.storyStructure;
+
   return (
     <div className="proof-story-structure">
       <div className="proof-wireframe proof-wireframe-before">
-        <span>before</span>
+        <span>{content.beforeLabel}</span>
         <i />
         <i />
         <i />
@@ -91,7 +95,7 @@ function StoryStructureProof() {
       </div>
       <div className="proof-structure-arrow" aria-hidden />
       <div className="proof-wireframe proof-wireframe-after">
-        <span>after</span>
+        <span>{content.afterLabel}</span>
         <i className="wide" />
         <i />
         <i className="wide" />
@@ -102,14 +106,16 @@ function StoryStructureProof() {
 }
 
 function FinanceDashboardProof() {
+  const content = generatedProofContent.financeDashboard;
+
   return (
     <div className="proof-finance-dashboard">
       <div className="proof-finance-header">
-        <span>available</span>
-        <strong>$842</strong>
+        <span>{content.availableLabel}</span>
+        <strong>{content.amount}</strong>
       </div>
       <div className="proof-budget-bars">
-        {["rent", "food", "savings"].map((item, index) => (
+        {content.bars.map((item, index) => (
           <div key={item}>
             <span>{item}</span>
             <i
@@ -121,18 +127,20 @@ function FinanceDashboardProof() {
           </div>
         ))}
       </div>
-      <div className="proof-finance-chip">AI quick add: coffee 4.50</div>
+      <div className="proof-finance-chip">{content.chip}</div>
     </div>
   );
 }
 
 function SupportWallProof() {
+  const content = generatedProofContent.supportWall;
+
   return (
     <div className="proof-support-wall">
-      <div className="proof-note-card">I needed to say this somewhere.</div>
-      <div className="proof-note-card is-muted">reply: you are not alone</div>
+      <div className="proof-note-card">{content.note}</div>
+      <div className="proof-note-card is-muted">{content.reply}</div>
       <div className="proof-moderation-queue">
-        <span>moderation</span>
+        <span>{content.queueLabel}</span>
         <i />
         <i />
         <i />
@@ -142,57 +150,93 @@ function SupportWallProof() {
 }
 
 function EventLandingProof() {
+  const content = generatedProofContent.eventLanding;
+
   return (
     <div className="proof-event-landing">
       <div className="proof-event-hero">
-        <span>PingBall</span>
-        <button type="button" tabIndex={-1}>register</button>
+        <span>{content.title}</span>
+        <button type="button" tabIndex={-1}>
+          {content.ctaLabel}
+        </button>
       </div>
       <div className="proof-event-grid">
-        <i>rules</i>
-        <i>schedule</i>
-        <i>teams</i>
-        <i>venue</i>
+        {content.grid.map((item) => (
+          <i key={item}>{item}</i>
+        ))}
       </div>
     </div>
   );
 }
 
 function GameInterfaceProof() {
+  const content = generatedProofContent.gameInterface;
+
   return (
     <div className="proof-game-interface">
       <div className="proof-game-hud">
-        <span>HP 82</span>
-        <span>shader pass</span>
+        <span>{content.hpLabel}</span>
+        <span>{content.shaderLabel}</span>
       </div>
       <div className="proof-game-stage">
         <i className="proof-game-player" />
         <i className="proof-game-target" />
       </div>
-      <div className="proof-game-dialog">input - feedback - loop</div>
+      <div className="proof-game-dialog">{content.dialog}</div>
     </div>
   );
 }
 
 function ServiceProof() {
+  const content = generatedProofContent.serviceProof;
+
   return (
     <div className="proof-service">
       <div className="proof-service-column">
-        <span>audit</span>
+        <span>{content.beforeLabel}</span>
         <i />
         <i />
         <i />
       </div>
       <div className="proof-service-column is-after">
-        <span>ship</span>
+        <span>{content.afterLabel}</span>
         <i />
         <i />
         <i />
       </div>
       <div className="proof-service-checklist">
-        <b>clear story</b>
-        <b>project proof</b>
-        <b>responsive handoff</b>
+        {content.checklist.map((item) => (
+          <b key={item}>{item}</b>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FontOfIntentProof() {
+  const content = generatedProofContent.fontOfIntent;
+
+  return (
+    <div className="proof-font-of-intent">
+      <div className="foi-preview-wordmark">{content.wordmark}</div>
+      <div className="foi-preview-body">
+        <h4>
+          {content.titleLines[0]}
+          <br />
+          {content.titleLines[1]}
+        </h4>
+        <p>
+          {content.subtitleLines[0]}
+          <br />
+          {content.subtitleLines[1]}
+        </p>
+        <i aria-hidden />
+        <div className="foi-preview-card">
+          <span className="foi-burst foi-burst-strong">{content.cardStrong}</span>{" "}
+          <span className="foi-burst foi-burst-mid">{content.cardMid}</span>
+          <span className="foi-demo-cursor" aria-hidden />
+        </div>
+        <span className="foi-preview-cta">{content.ctaLabel}</span>
       </div>
     </div>
   );
@@ -216,6 +260,8 @@ function renderVariant(variant: GeneratedProofVariant) {
       return <GameInterfaceProof />;
     case "service-proof":
       return <ServiceProof />;
+    case "font-of-intent":
+      return <FontOfIntentProof />;
     default:
       return null;
   }
@@ -232,4 +278,3 @@ export function GeneratedProof({ variant, label }: GeneratedProofProps) {
     </div>
   );
 }
-import type { CSSProperties } from "react";

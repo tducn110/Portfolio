@@ -1,5 +1,10 @@
 import { Code2, Github } from "lucide-react";
-import { destinationTags, facts, sourceTags } from "../content/portfolioContent";
+import {
+  destinationTags,
+  facts,
+  heroContent,
+  sourceTags,
+} from "../content/portfolioContent";
 import { portfolioMedia } from "../content/portfolioMedia";
 import { MediaFrame } from "./MediaFrame";
 import { ButtonArrow, motionAttr, scrollToTarget } from "./shared";
@@ -21,7 +26,7 @@ function DataFlowDiagram() {
     <div
       className="data-flow reveal"
       data-motion={motionAttr("reveal")}
-      aria-label="Product building flow diagram"
+      aria-label={heroContent.flowAriaLabel}
     >
       <div className="flow-lines" aria-hidden>
         <span data-motion={motionAttr("flow-line")} />
@@ -44,10 +49,10 @@ function DataFlowDiagram() {
         />
         <div className="processor-core">
           <Code2 aria-hidden size={22} strokeWidth={1.5} />
-          <span>Normalize</span>
+          <span>{heroContent.processorLabel}</span>
         </div>
         <div className="processor-badges">
-          {["Event", "Ingest", "Route", "Refactor"].map((item) => (
+          {heroContent.processorStatuses.map((item) => (
             <span key={item} data-motion={motionAttr("processor-status")}>
               <i aria-hidden />
               {item}
@@ -67,51 +72,54 @@ function DataFlowDiagram() {
 
 export function Hero() {
   return (
-    <section id="hero" className="hero-section section-shell">
+    <section
+      id="hero"
+      className="hero-section section-shell"
+      data-component="Hero"
+      data-file="src/app/portfolio/Hero.tsx"
+    >
       <div className="hero-content">
         <p className="hero-eyebrow" data-motion={motionAttr("hero-eyebrow")}>
-          CSE student / full-stack builder / AI-assisted workflow
+          {heroContent.eyebrow}
         </p>
         <h1 className="hero-title" data-motion={motionAttr("hero-title")}>
           <span className="line" data-motion={motionAttr("hero-title-line")}>
-            I shape rough ideas into
+            {heroContent.titleLines[0]}
           </span>
           <span className="line" data-motion={motionAttr("hero-title-line")}>
-            products people can use.
+            {heroContent.titleLines[1]}
           </span>
         </h1>
         <p className="hero-copy" data-motion={motionAttr("hero-copy")}>
-          I'm Nguyen Tam Duc — a Computer Science and Engineering student from
-          Da Nang. I may not know everything deeply at first, but I start moving
-          early, learn fast, adapt, and build until the product works.
+          {heroContent.body}
         </p>
         <div className="hero-actions">
           <button
             type="button"
             className="button button-filled hero-cta"
             data-motion={motionAttr("hero-cta")}
-            onClick={() => scrollToTarget("#projects")}
+            onClick={() => scrollToTarget(heroContent.actions.projects.href)}
           >
-            View Projects
+            {heroContent.actions.projects.label}
             <ButtonArrow />
           </button>
           <button
             type="button"
             className="button button-ghost hero-cta"
             data-motion={motionAttr("hero-cta")}
-            onClick={() => scrollToTarget("#service")}
+            onClick={() => scrollToTarget(heroContent.actions.service.href)}
           >
-            Work With Me
+            {heroContent.actions.service.label}
           </button>
           <a
             className="button button-link hero-cta"
             data-motion={motionAttr("hero-cta")}
-            href="https://github.com/tducn110"
+            href={heroContent.actions.github.href}
             target="_blank"
             rel="noreferrer"
           >
             <Github aria-hidden size={16} strokeWidth={1.6} />
-            GitHub
+            {heroContent.actions.github.label}
           </a>
         </div>
       </div>

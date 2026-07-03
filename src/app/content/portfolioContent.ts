@@ -25,11 +25,15 @@ export type Project = {
   stack: string;
   themeColor?: string;
   link?: string;
+  status: "shipped" | "experiment" | "prototype" | "refactor";
 };
 
 export type ProcessStep = {
+  label: string;
   title: string;
   body: string;
+  points: string[];
+  icon: "brain" | "layout" | "code" | "refresh";
 };
 
 export type ServiceDetail = {
@@ -111,6 +115,7 @@ export const projects: Project[] = [
     stack: "React, Next.js, Vercel, Typography Systems",
     themeColor: "220 10% 40%", /* slate/gray */
     link: "https://github.com/tducn110/Font-of-Intent",
+    status: "shipped",
   },
   {
     name: "Finance Tracker V3",
@@ -124,6 +129,7 @@ export const projects: Project[] = [
     stack: "Next.js, TypeScript, Hono, Zod, Supabase PostgreSQL, Drizzle, Turborepo",
     themeColor: "160 60% 40%", /* green/mint */
     link: "https://finance-for-me-local.vercel.app",
+    status: "shipped",
   },
   {
     name: "Unsaid Words, Shared Hearts",
@@ -137,6 +143,7 @@ export const projects: Project[] = [
     stack: "React, Supabase, Postgres, RPC flows, moderation states",
     themeColor: "260 50% 60%", /* lavender/purple */
     link: "https://unsaidwords.vercel.app",
+    status: "shipped",
   },
   {
     name: "PingBall Landing Page",
@@ -150,6 +157,7 @@ export const projects: Project[] = [
     stack: "React, responsive design patterns",
     themeColor: "25 80% 50%", /* orange */
     link: "https://pingball.vercel.app",
+    status: "shipped",
   },
   {
     name: "First Game Prototype",
@@ -162,30 +170,69 @@ export const projects: Project[] = [
     role: "Game loop, canvas rendering, collision math",
     stack: "HTML Canvas, Vanilla JS, RequestAnimationFrame",
     themeColor: "350 60% 50%", /* red */
+    status: "prototype",
   },
 ];
 
+export type PipelineStep = {
+  step: string;
+  status: string;
+  active?: boolean;
+};
+
+export const projectPipeline: PipelineStep[] = [
+  { step: "Understand", status: "Completed" },
+  { step: "Shape", status: "Completed" },
+  { step: "Build", status: "In Progress (68%)", active: true },
+  { step: "Refactor", status: "Pending" }
+];
+
+
 export const processSteps: ProcessStep[] = [
   {
+    label: "PHASE 01",
     title: "Understand",
-    body: "Find the real problem, the audience, and the first useful outcome before touching code.",
+    body: "Before writing any code, I define the problem space. A good portfolio or product needs to tell a clear story, not just show features.",
+    points: [
+      "Extracting the core narrative",
+      "Mapping the user journey",
+      "Defining technical constraints"
+    ],
+    icon: "brain"
   },
   {
+    label: "PHASE 02",
     title: "Shape",
-    body: "Turn messy input into a user flow, content structure, and system map that can actually be built.",
+    body: "Turning messy ideas into a structured system. This is where the database schema, API contracts, and UI flow are planned.",
+    points: [
+      "Data flow and schema design",
+      "Component hierarchy mapping",
+      "AI-assisted architecture planning"
+    ],
+    icon: "layout"
   },
   {
+    label: "PHASE 03",
     title: "Build",
-    body: "Ship the interface, data model, API boundaries, and first working version — fast, then iterate.",
+    body: "Shipping the first working version fast. I focus on clean structure and deterministic logic over premature optimization.",
+    points: [
+      "TypeScript & React implementation",
+      "Full-stack integration (Next.js/Supabase)",
+      "Responsive, story-driven UI rendering"
+    ],
+    icon: "code"
   },
   {
+    label: "PHASE 04",
     title: "Refactor",
-    body: "Clean the rough edges, test the assumptions, and make the system easier to grow and hand off.",
-  },
-  {
-    title: "Use AI Carefully",
-    body: "Use AI for research, iteration, and review — while keeping product decisions intentional and human.",
-  },
+    body: "Cleaning the rough edges and preparing for handoff. A project isn't done until the codebase is legible and edge cases are tested.",
+    points: [
+      "Trimming conceptual fat and unused code",
+      "Performance and accessibility audits",
+      "Handoff documentation and deployment"
+    ],
+    icon: "refresh"
+  }
 ];
 
 export const trustPoints = [
@@ -195,17 +242,189 @@ export const trustPoints = [
   "Comfortable across UI, backend, database, and deployment",
 ];
 
-export const serviceDetails: ServiceDetail[] = [
+export type StackLayer = {
+  label: string;
+  title: string;
+  body: string;
+  icon: "layers" | "database" | "server";
+  techs: string[];
+};
+
+export const stackLayers: StackLayer[] = [
   {
-    title: "What I build",
-    body: "Portfolio websites, project case studies, student and developer pages, and small landing pages that tell a clear story.",
+    label: "LAYER 01",
+    title: "Frontend Interface",
+    body: "Crafting highly responsive, accessible, and performant user interfaces. Emphasizing typography, space, and motion to create editorial-grade experiences.",
+    icon: "layers",
+    techs: ["React", "TypeScript", "Tailwind", "Framer Motion"],
   },
   {
-    title: "What you get",
-    body: "A clear narrative, stronger project proof, responsive UI, and a structure that makes your strengths easier to present and remember.",
+    label: "LAYER 02",
+    title: "Backend Logic",
+    body: "Developing resilient API architectures and secure data handling mechanisms designed for scale and maintainability.",
+    icon: "database",
+    techs: ["Next.js", "Supabase", "Zod", "PostgreSQL"],
   },
   {
-    title: "How we work",
-    body: "Audit the raw material, shape the narrative, build the page, then polish the details that affect trust and first impressions.",
-  },
+    label: "LAYER 03",
+    title: "Infrastructure",
+    body: "Architecting cloud environments and deployment strategies ensuring high availability and zero-downtime updates.",
+    icon: "server",
+    techs: ["Vercel", "GitHub Actions", "Docker", "AWS"],
+  }
 ];
+
+export type ProtocolStep = {
+  step: string;
+  title: string;
+  body: string;
+};
+
+export const collaborationProtocol: ProtocolStep[] = [
+  {
+    step: "01",
+    title: "Discovery Brief",
+    body: "A comprehensive discussion outlining architecture decisions, stack selection, and scalability models before writing a single line of code.",
+  },
+  {
+    step: "02",
+    title: "Structure & Prototype",
+    body: "Mapping out the user flow and database schema. Building a clickable shell to validate assumptions early.",
+  },
+  {
+    step: "03",
+    title: "Build & Refactor",
+    body: "Shipping functional features iteratively. Cleaning the codebase continuously to maintain structural integrity.",
+  },
+  {
+    step: "04",
+    title: "Production Handoff",
+    body: "Thorough editorial-grade documentation covering codebase structure, deployment pipelines, and API references for internal maintenance.",
+  }
+];
+
+export const heroContent = {
+  flowAriaLabel: "Product building flow diagram",
+  processorLabel: "Normalize",
+  processorStatuses: ["Event", "Ingest", "Route", "Refactor"],
+  eyebrow: "CSE student / full-stack builder / AI-assisted workflow",
+  titleLines: ["I shape rough ideas into", "products people can use."],
+  body: "I'm Nguyen Tam Duc — a Computer Science and Engineering student from Da Nang. I may not know everything deeply at first, but I start moving early, learn fast, adapt, and build until the product works.",
+  actions: {
+    projects: {
+      label: "View Projects",
+      href: "#projects",
+    },
+    service: {
+      label: "Work With Me",
+      href: "#service",
+    },
+    github: {
+      label: "GitHub",
+      href: "https://github.com/tducn110",
+    },
+  },
+} as const;
+
+export const serviceSectionContent = {
+  stackTitle: "The Stack Architecture",
+  stackKicker: "01 // STRUCTURAL OVERVIEW",
+  protocolTitle: "Collaboration Protocol.",
+  protocolBody: "My process is structured, transparent, and driven by continuous delivery. I work closely with you to understand the problem before building the solution.",
+} as const;
+
+export const serviceCta = {
+  kicker: "NTD TECHNICAL EDITORIAL",
+  title: "Start a Project.",
+  body: "I am open to new full-stack development projects. Tell me what you want to build, and I can help turn your idea into a clean interactive web experience.",
+  buttonLabel: "Project Inquiry",
+  buttonHref: "#contact"
+} as const;
+
+export const contactSectionContent = {
+  eyebrow: "Contact",
+  title: "Let’s build something that matters.",
+  body: "Bring a rough idea, a project that needs structure, or a portfolio story that’s hard to explain — I’ll help shape it into something clear and usable.",
+  links: {
+    email: {
+      label: "n.tduc011006dn@gmail.com",
+      href: "mailto:n.tduc011006dn@gmail.com",
+    },
+    github: {
+      label: "github.com/tducn110",
+      href: "https://github.com/tducn110",
+    },
+    location: {
+      label: "Da Nang, Viet Nam",
+    },
+  },
+} as const;
+
+export const footerContent = {
+  name: "Nguyen Tam Duc",
+  body: "CSE student and early-stage product builder. I start moving when projects begin.",
+} as const;
+
+export const generatedProofContent = {
+  variantTitles: {
+    "hero-flow": "Idea to shipped product",
+    "system-map": "Flow / API / data / tests",
+    "story-structure": "Before and after structure",
+    "finance-dashboard": "Budget-first money system",
+    "support-wall": "Anonymous support wall",
+    "event-landing": "Event landing path",
+    "game-interface": "Prototype interface loop",
+    "service-proof": "Portfolio service proof",
+    "font-of-intent": "Font of Intent system",
+  },
+  heroFlow: {
+    sourcePills: ["rough idea", "user story", "schema"],
+    processorLabel: "normalize",
+    processorMeta: "route / refactor",
+    destinationPills: ["full-stack app", "portfolio site", "event launch"],
+  },
+  systemMap: {
+    nodes: ["user flow", "API", "database", "validation", "tests", "deploy"],
+  },
+  storyStructure: {
+    beforeLabel: "before",
+    afterLabel: "after",
+  },
+  financeDashboard: {
+    availableLabel: "available",
+    amount: "$842",
+    bars: ["rent", "food", "savings"],
+    chip: "AI quick add: coffee 4.50",
+  },
+  supportWall: {
+    note: "I needed to say this somewhere.",
+    reply: "reply: you are not alone",
+    queueLabel: "moderation",
+  },
+  eventLanding: {
+    title: "PingBall",
+    ctaLabel: "register",
+    grid: ["rules", "schedule", "teams", "venue"],
+  },
+  gameInterface: {
+    hpLabel: "HP 82",
+    shaderLabel: "shader pass",
+    dialog: "input - feedback - loop",
+  },
+  serviceProof: {
+    beforeLabel: "audit",
+    afterLabel: "ship",
+    checklist: ["clear story", "project proof", "responsive handoff"],
+  },
+  fontOfIntent: {
+    wordmark: "font of intent",
+    titleLines: ["your words reveal", "what your fingers felt"],
+    subtitleLines: [
+      "a letter that proves you were here.",
+      "not generated. not autocompleted. yours.",
+    ],
+    cardStrong: "Dear you,",
+    cardMid: "I started this letter three t",
+    ctaLabel: "Write Your Letter →",
+  },
+} as const;

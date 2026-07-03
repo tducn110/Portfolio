@@ -36,7 +36,12 @@ function FeatureCard({ card, wide }: { card: BuildCard; wide?: boolean }) {
 
 export function OriginSection() {
   return (
-    <section id="origin" className="section-shell origin-section">
+    <section
+      id="origin"
+      className="section-shell origin-section"
+      data-component="OriginSection"
+      data-file="src/app/portfolio/OriginSection.tsx"
+    >
       <SectionHeader
         eyebrow="Origin"
         title="Everyone has a strength. I help make it visible."
@@ -49,10 +54,25 @@ export function OriginSection() {
         ))}
       </div>
 
-      <div className="capability-strip reveal" data-motion={motionAttr("reveal", "parallax-h")} data-parallax-dir="left">
-        {capabilities.map((capability) => (
-          <span key={capability}>{capability}</span>
-        ))}
+      <div
+        className="capability-strip reveal"
+        data-motion={motionAttr("reveal", "parallax-h")}
+        data-parallax-dir="left"
+        aria-label="Capabilities"
+      >
+        <div className="capability-track">
+          {[0, 1].map((setIndex) => (
+            <div
+              className="capability-group"
+              key={setIndex}
+              aria-hidden={setIndex === 1}
+            >
+              {capabilities.map((capability) => (
+                <span key={capability}>{capability}</span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

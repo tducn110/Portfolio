@@ -1,46 +1,71 @@
-import { processSteps } from "../content/portfolioContent";
+import { BrainCircuit, LayoutTemplate, Code2, RefreshCcw, Check } from "lucide-react";
+import { ProcessStep, processSteps } from "../content/portfolioContent";
 import { motionAttr, SectionHeader } from "./shared";
+
+const phaseIcons = {
+  brain: BrainCircuit,
+  layout: LayoutTemplate,
+  code: Code2,
+  refresh: RefreshCcw,
+} satisfies Record<ProcessStep["icon"], any>;
+
+function ProcessCard({ step, index }: { step: ProcessStep; index: number }) {
+  const Icon = phaseIcons[step.icon];
+  const isEven = index % 2 === 0;
+
+  return (
+    <div className={`process-timeline-item ${isEven ? "item-left" : "item-right"} reveal`} data-motion={motionAttr("reveal")}>
+      <div className="timeline-content text-block">
+        <span className="phase-label">{step.label}</span>
+        <h3>{step.title}</h3>
+        <p>{step.body}</p>
+      </div>
+
+      <div className="timeline-center" aria-hidden>
+        <div className="timeline-dot" />
+      </div>
+
+      <div className="timeline-content card-block">
+        <div className="process-detail-card" data-step-index={index}>
+          <div className="card-bg-wash" />
+          <div className="card-icon-bg">
+            <Icon size={64} strokeWidth={1} />
+          </div>
+          <ul className="card-points">
+            {step.points.map((point) => (
+              <li key={point}>
+                <Check size={18} strokeWidth={2} />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function ProcessSection() {
   return (
-    <section id="process" className="section-shell process-section">
-      <div className="process-layout">
-        <div className="process-info">
-          <SectionHeader
-            eyebrow="Process"
-            title="From unclear brief to working system."
-            body="The workflow is simple on purpose: understand the problem, shape the flow, build the system, then improve it."
-          />
-          <div className="process-extra">
-            <p>
-              I do not start with code immediately. Before building, I try to understand the problem behind the request.
-            </p>
-            <p>
-              After that, I turn the idea into structure: pages, components, data, API, validation, and deployment.
-            </p>
-          </div>
-        </div>
+    <section
+      id="process"
+      className="section-shell process-section"
+      data-component="ProcessSection"
+      data-file="src/app/portfolio/ProcessSection.tsx"
+    >
+      <div className="process-header reveal" data-motion={motionAttr("reveal")}>
+        <SectionHeader
+          eyebrow="The Monad Way"
+          title="From abstract thought to working system."
+          body="I prioritize deep understanding over rapid iteration, shaping structural integrity before rendering surface details."
+        />
+      </div>
 
-        <div
-          className="process-panel reveal"
-          data-motion={motionAttr("process-panel", "reveal")}
-        >
-          <div className="process-line" aria-hidden>
-            <span className="process-fill" data-motion={motionAttr("process-fill")} />
-          </div>
-          {processSteps.map((step, index) => (
-            <article
-              key={step.title}
-              className="process-step"
-              data-motion={motionAttr("process-step")}
-              data-step-index={index}
-            >
-              <span />
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
-            </article>
-          ))}
-        </div>
+      <div className="process-timeline">
+        <div className="timeline-line-vertical" aria-hidden />
+        {processSteps.map((step, index) => (
+          <ProcessCard key={step.title} step={step} index={index} />
+        ))}
       </div>
     </section>
   );

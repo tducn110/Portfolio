@@ -18,7 +18,13 @@ export default function App() {
   usePortfolioMotion(rootRef);
 
   return (
-    <div ref={rootRef} className="portfolio-root" style={{ backgroundColor: C.parchment }}>
+    <div
+      ref={rootRef}
+      className="portfolio-root"
+      style={{ backgroundColor: C.parchment }}
+      data-component="App"
+      data-file="src/app/App.tsx"
+    >
       <div className="theme-tint-overlay" />
       <BootScreen />
       <ThreeBackgroundLoader />

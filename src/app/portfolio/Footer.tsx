@@ -1,12 +1,16 @@
-import { navLinks } from "../content/portfolioContent";
+import { footerContent, navLinks } from "../content/portfolioContent";
 import { scrollToTarget } from "./shared";
 
 export function Footer() {
   return (
-    <footer className="footer-shell">
+    <footer
+      className="footer-shell"
+      data-component="Footer"
+      data-file="src/app/portfolio/Footer.tsx"
+    >
       <div>
-        <strong>Nguyen Tam Duc</strong>
-        <p>CSE student and early-stage product builder. I start moving when projects begin.</p>
+        <strong>{footerContent.name}</strong>
+        <p>{footerContent.body}</p>
       </div>
       <div className="footer-links">
         {navLinks.map((link) => (

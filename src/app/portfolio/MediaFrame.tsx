@@ -22,15 +22,28 @@ export function MediaFrame({
   media,
   className = "",
 }: {
-  media: PortfolioMedia;
+  media?: PortfolioMedia;
   className?: string;
 }) {
   const [mediaFailed, setMediaFailed] = useState(false);
   const [posterFailed, setPosterFailed] = useState(false);
   const [ready, setReady] = useState(false);
   const prefersReduced = usePrefersReducedMotion();
+
+  if (!media) {
+    return (
+      <figure className={`media-frame ${className}`} data-motion="media-frame reveal">
+        <div className="media-frame-fallback" role="img" aria-label="Preview pending">
+          <ImageOff aria-hidden size={20} strokeWidth={1.5} />
+          <span>Preview pending</span>
+        </div>
+      </figure>
+    );
+  }
+
   const posterOrImage = media.poster ?? media.src;
   const hasVideoSource = Boolean(media.src || media.sources?.length);
+  const shouldUseIframe = media.type === "iframe" && !mediaFailed && media.src;
   const shouldUseVideo =
     media.type === "video" && !mediaFailed && !prefersReduced && hasVideoSource;
   const shouldUseImage =
@@ -38,15 +51,28 @@ export function MediaFrame({
     (media.type === "video" &&
       (prefersReduced || mediaFailed || !media.src) &&
       posterOrImage &&
-      !posterFailed);
+      !posterFailed) ||
+    (media.type === "iframe" && mediaFailed && posterOrImage && !posterFailed);
   const canUseGenerated = Boolean(media.generatedVariant);
-  const isFallback = !shouldUseVideo && !shouldUseImage;
+  const isFallback = !shouldUseIframe && !shouldUseVideo && !shouldUseImage;
   const shouldUseGenerated = isFallback && canUseGenerated;
   const isPendingVideo = Boolean(shouldUseVideo && !ready && !mediaFailed);
+  const isPendingIframe = Boolean(shouldUseIframe && !ready && !mediaFailed);
 
   return (
     <figure className={`media-frame ${className}`} data-motion="media-frame reveal">
-      {shouldUseVideo ? (
+      {shouldUseIframe ? (
+        <iframe
+          src={media.src}
+          title={media.alt}
+          onLoad={() => setReady(true)}
+          onError={() => setMediaFailed(true)}
+          style={{ width: "100%", height: "100%", border: "none", pointerEvents: "none" }}
+          scrolling="no"
+          tabIndex={-1}
+          aria-hidden="true"
+        />
+      ) : shouldUseVideo ? (
         <video
           src={media.sources?.length ? undefined : media.src}
           poster={media.poster}
@@ -75,7 +101,7 @@ export function MediaFrame({
           alt={media.alt}
           onLoad={() => setReady(true)}
           onError={() => {
-            if (media.type === "video") {
+            if (media.type === "video" || media.type === "iframe") {
               setPosterFailed(true);
             } else {
               setMediaFailed(true);
@@ -91,7 +117,7 @@ export function MediaFrame({
         </div>
       )}
 
-      {isPendingVideo && (
+      {(isPendingVideo || isPendingIframe) && (
         <div className="media-frame-fallback media-frame-overlay" aria-hidden>
           {media.generatedVariant ? (
             <GeneratedProof variant={media.generatedVariant} label={media.label} />
@@ -104,7 +130,7 @@ export function MediaFrame({
         </div>
       )}
 
-      {media.label && !isFallback && !isPendingVideo && (
+      {media.label && !isFallback && !isPendingVideo && !isPendingIframe && (
         <figcaption>
           {media.type === "video" && !prefersReduced && !mediaFailed && (
             <Play aria-hidden size={12} strokeWidth={1.7} />

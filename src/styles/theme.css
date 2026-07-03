@@ -2230,3 +2230,702 @@ a:focus-visible {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ==========================================================================
+   T-STITCH-002: ProcessSection "Monad Way" Upgrade
+   ========================================================================== */
+
+.process-section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.process-header {
+  max-width: 800px;
+  margin-bottom: 80px;
+}
+
+.process-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.timeline-line-vertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: var(--color-ink-black);
+  opacity: 0.1;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.process-timeline-item {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .process-timeline-item {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
+  }
+  
+  .process-timeline-item.item-right {
+    flex-direction: row-reverse;
+  }
+  
+  .process-timeline-item.item-right .text-block {
+    text-align: right;
+    padding-right: 48px;
+  }
+  
+  .process-timeline-item.item-left .text-block {
+    text-align: left;
+    padding-left: 48px;
+  }
+}
+
+.timeline-content {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .timeline-content {
+    width: 42%;
+  }
+}
+
+.timeline-center {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .timeline-center {
+    display: flex;
+    width: 16%;
+    justify-content: center;
+    padding-top: 40px;
+  }
+  
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-ink-black);
+    border-radius: 50%;
+    border: 4px solid var(--color-parchment-cream);
+    box-sizing: content-box;
+  }
+}
+
+.text-block .phase-label {
+  display: block;
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-warm-stone);
+  margin-bottom: 16px;
+}
+
+.text-block h3 {
+  font-family: var(--font-untitled-serif);
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--color-ink-black);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.text-block p {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 14px;
+  color: var(--color-graphite);
+  line-height: 1.6;
+}
+
+.process-detail-card {
+  position: relative;
+  border-radius: 40px;
+  padding: 48px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-lavender-mist);
+}
+
+.process-detail-card[data-step-index="0"] .card-bg-wash {
+  background: linear-gradient(135deg, rgba(255,218,214,0.3) 0%, transparent 100%);
+}
+.process-detail-card[data-step-index="1"] .card-bg-wash {
+  background: linear-gradient(135deg, rgba(207,218,245,0.4) 0%, transparent 100%);
+}
+.process-detail-card[data-step-index="2"] .card-bg-wash {
+  background: linear-gradient(135deg, rgba(226,193,97,0.2) 0%, transparent 100%);
+}
+.process-detail-card[data-step-index="3"] .card-bg-wash {
+  background: linear-gradient(135deg, rgba(167,252,205,0.3) 0%, transparent 100%);
+}
+
+.card-bg-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.card-icon-bg {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  opacity: 0.15;
+  z-index: 2;
+  color: var(--color-ink-black);
+}
+
+.process-detail-card[data-step-index="0"] .card-icon-bg { top: 0; right: 0; padding: 24px; }
+.process-detail-card[data-step-index="1"] .card-icon-bg { top: auto; bottom: 0; right: 0; padding: 24px; }
+.process-detail-card[data-step-index="2"] .card-icon-bg { top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; }
+.process-detail-card[data-step-index="3"] .card-icon-bg { top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.3; }
+
+.card-points {
+  position: relative;
+  z-index: 10;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 14px;
+  color: var(--color-ink-black);
+  line-height: 1.4;
+}
+
+.card-points li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@media (max-width: 767px) {
+  .timeline-line-vertical {
+    left: 24px;
+    transform: none;
+  }
+  
+  .process-timeline-item {
+    padding-left: 48px;
+    margin-bottom: 48px;
+  }
+  
+  .timeline-center {
+    display: flex;
+    position: absolute;
+    left: 18px;
+    top: 40px;
+    padding: 0;
+    width: auto;
+  }
+  
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-ink-black);
+    border-radius: 50%;
+    border: 4px solid var(--color-parchment-cream);
+    box-sizing: content-box;
+  }
+}
+
+
+/* ==========================================================================
+   T-STITCH-003: ServiceSection Upgrade
+   ========================================================================== */
+
+.service-section {
+  padding-top: 120px;
+  padding-bottom: 80px;
+}
+
+/* Stack Architecture */
+.stack-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--color-ink-black);
+  padding-bottom: 16px;
+}
+
+.stack-header h2 {
+  font-family: var(--font-untitled-serif);
+  font-size: 40px;
+  color: var(--color-ink-black);
+  line-height: 1.2;
+}
+
+.stack-kicker {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-warm-stone);
+  text-transform: uppercase;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .stack-kicker {
+    display: block;
+  }
+}
+
+.stack-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .stack-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stack-card {
+  background-color: var(--color-lavender-mist);
+  border-radius: 40px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.stack-card:nth-child(2) {
+  background-color: #eeeeee;
+}
+
+.stack-card:nth-child(3) {
+  background-color: #eeeeee;
+}
+
+.stack-icon-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 24px;
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+  color: var(--color-ink-black);
+}
+
+.stack-card:hover .stack-icon-bg {
+  opacity: 0.2;
+}
+
+.layer-label {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-warm-stone);
+  margin-bottom: 48px;
+  display: block;
+}
+
+.stack-card h3 {
+  font-family: var(--font-untitled-serif);
+  font-size: 32px;
+  color: var(--color-ink-black);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.stack-card p {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 14px;
+  color: var(--color-graphite);
+  margin-bottom: 32px;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+.tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-pill {
+  padding: 4px 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 100px;
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-ink-black);
+  background-color: rgba(255,255,255,0.5);
+}
+
+/* Collaboration Protocol */
+.protocol-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  padding-top: 80px;
+  margin-top: 80px;
+  border-top: 1px solid var(--color-ink-black);
+}
+
+@media (min-width: 768px) {
+  .protocol-container {
+    grid-template-columns: 5fr 7fr;
+  }
+}
+
+.protocol-intro h2 {
+  font-family: var(--font-untitled-serif);
+  font-size: 40px;
+  color: var(--color-ink-black);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.protocol-intro p {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 14px;
+  color: var(--color-graphite);
+  line-height: 1.5;
+}
+
+.protocol-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.protocol-step-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-ink-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.step-number span {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-ink-black);
+}
+
+.step-content h4 {
+  font-family: var(--font-untitled-serif);
+  font-size: 24px;
+  color: var(--color-ink-black);
+  margin-bottom: 8px;
+}
+
+.step-content p {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 14px;
+  color: var(--color-graphite);
+  line-height: 1.5;
+}
+
+/* Dark CTA Panel */
+.service-cta-panel {
+  background-color: var(--color-ink-black);
+  color: var(--color-parchment-cream);
+  border-radius: 8px;
+  padding: 48px 24px;
+  margin-top: 80px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+@media (min-width: 768px) {
+  .service-cta-panel {
+    padding: 96px;
+  }
+}
+
+.cta-kicker-wrap {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  text-align: left;
+}
+
+.cta-kicker {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-parchment-cream);
+}
+
+.cta-subkicker {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-warm-stone);
+  margin-top: 4px;
+}
+
+.cta-content {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 64px;
+}
+
+.cta-content h2 {
+  font-family: var(--font-untitled-serif);
+  font-size: 40px;
+  color: var(--color-parchment-cream);
+  margin-bottom: 24px;
+}
+
+.cta-content p {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 16px;
+  color: var(--color-warm-stone);
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  background-color: var(--color-parchment-cream);
+  color: var(--color-ink-black);
+  border-radius: 100px;
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  gap: 8px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: var(--color-lavender-mist);
+}
+
+/* ==========================================================================
+   T-STITCH-004: ProjectsSection Laboratory Upgrade
+   ========================================================================== */
+
+/* Project Atlas Pipeline */
+.project-atlas-strip {
+  margin-bottom: 64px;
+}
+
+.atlas-title {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-warm-stone);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+
+.pipeline-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid var(--color-ink-black);
+  border-radius: 40px;
+  padding: 32px;
+  background-color: var(--color-parchment-cream);
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .pipeline-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.pipeline-line {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .pipeline-line {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background-color: var(--color-ink-black);
+    z-index: 0;
+  }
+}
+
+.pipeline-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+  background-color: var(--color-parchment-cream);
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .pipeline-step {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.step-indicator {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-ink-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-ink-black);
+  color: var(--color-parchment-cream);
+}
+
+.pipeline-step.active .step-indicator {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-ink-black);
+  background-color: var(--color-parchment-cream);
+  color: var(--color-ink-black);
+  box-shadow: 0 0 0 4px var(--color-lavender-mist);
+}
+
+.pipeline-step:not(.active) .step-indicator:has(circle) {
+  background-color: transparent;
+  color: var(--color-warm-stone);
+  border-color: var(--color-warm-stone);
+  border-style: dashed;
+}
+
+.step-pulse {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-ink-black);
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-pulse {
+    animation: none;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.step-name {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-ink-black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+.pipeline-step:not(.active) .step-text .step-name {
+  color: var(--color-warm-stone);
+  font-weight: normal;
+}
+
+.step-status {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 12px;
+  color: var(--color-warm-stone);
+  margin-top: 4px;
+}
+
+.pipeline-step.active .step-status {
+  color: var(--color-ink-black);
+}
+
+/* Project Card Status Pill & Case Study Mods */
+.project-meta-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.project-status-pill {
+  font-family: var(--font-abc-diatype-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 100px;
+  background-color: rgba(255,255,255,0.5);
+  color: var(--color-ink-black);
+}
+
+.case-study-card {
+  border: 1px solid var(--color-ink-black);
+}
+
+.case-study-badge {
+  display: inline-block;
+  background-color: var(--color-ink-black);
+  color: var(--color-parchment-cream);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.case-study-title {
+  font-family: var(--font-untitled-serif);
+  font-size: 32px;
+}

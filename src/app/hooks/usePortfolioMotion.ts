@@ -323,6 +323,7 @@ function initCursorDot() {
   let mouseY = 0;
   let dotX = 0;
   let dotY = 0;
+  let animationFrameId = 0;
 
   const handleMove = (event: MouseEvent) => {
     mouseX = event.clientX;
@@ -335,12 +336,13 @@ function initCursorDot() {
     dotX += (mouseX - dotX) * 0.15;
     dotY += (mouseY - dotY) * 0.15;
     dot.style.transform = `translate(${dotX - 4}px, ${dotY - 4}px)`;
-    requestAnimationFrame(tick);
+    animationFrameId = requestAnimationFrame(tick);
   };
 
-  requestAnimationFrame(tick);
+  animationFrameId = requestAnimationFrame(tick);
 
   return () => {
+    cancelAnimationFrame(animationFrameId);
     window.removeEventListener("mousemove", handleMove);
     dot.remove();
   };
@@ -440,7 +442,6 @@ export function usePortfolioMotion(rootRef: RefObject<HTMLElement>) {
       initProcessMotion();
       initProjectMotion();
       initCapabilityStripScroll();
-      initDynamicThemeMotion();
       cleanups.push(initNavScrollShadow());
       cleanups.push(initCursorDot());
     }, root);

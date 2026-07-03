@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import { C, F, Sh } from "../tokens";
 
@@ -6,7 +6,7 @@ const MODULES = [
   { label: "Origin", id: "origin" },
   { label: "Projects", id: "projects" },
   { label: "Process", id: "process" },
-  { label: "Service", id: "services" },
+  { label: "Service", id: "service" },
   { label: "Contact", id: "contact" },
 ];
 
@@ -69,6 +69,33 @@ export function BootScreen() {
     return () => window.removeEventListener("open-menu", handleOpenMenu);
   }, []);
 
+  const completeBoot = useCallback((targetId?: string) => {
+    sessionStorage.setItem("portfolio_boot_seen_v4", "true");
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const finish = () => {
+      setShouldShow(false);
+      if (targetId) {
+        setTimeout(() => {
+          document.getElementById(targetId)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+        }, 100);
+      }
+    };
+
+    if (reduced) {
+      finish();
+      return;
+    }
+    
+    gsap.to(".boot-screen", {
+      opacity: 0,
+      duration: 0.6,
+      ease: "power2.inOut",
+      onComplete: finish,
+    });
+  }, []);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Enter" && shouldShow) {
@@ -77,30 +104,12 @@ export function BootScreen() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [shouldShow]);
-
-  const completeBoot = (targetId?: string) => {
-    sessionStorage.setItem("portfolio_boot_seen_v4", "true");
-    
-    gsap.to(".boot-screen", {
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.inOut",
-      onComplete: () => {
-        setShouldShow(false);
-        if (targetId) {
-          setTimeout(() => {
-            document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
-          }, 100);
-        }
-      }
-    });
-  };
+  }, [shouldShow, completeBoot]);
 
   if (!shouldShow) return null;
 
   return (
-    <div className="boot-screen" style={{ backgroundColor: C.parchment }}>
+    <div className="boot-screen" style={{ backgroundColor: C.parchment }} role="dialog" aria-label="Portfolio boot screen">
       <div className="boot-grid" />
       
       <div className="boot-content">
@@ -129,18 +138,33 @@ export function BootScreen() {
             <p className="boot-modules-title" style={{ fontFamily: F.mono }}>
               {isReadyToEnter ? "Select Destination" : "Loading modules"}
             </p>
-            <ul>
+            <ul role={isReadyToEnter ? "menu" : "list"} aria-label="Portfolio sections">
               {MODULES.map((mod, i) => {
                 const isReady = isReadyToEnter || i < readyCount;
                 return (
-                  <li 
-                    key={mod.label} 
+                  <li
+                    key={mod.label}
                     className={`${isReady ? "is-ready" : "is-pending"} ${isReadyToEnter ? "is-clickable" : ""}`}
-                    onClick={() => { if (isReadyToEnter) completeBoot(mod.id); }}
+                    role={isReadyToEnter ? "none" : undefined}
                   >
-                    <span className="boot-module-status" />
-                    <span className="boot-module-name">{mod.label}</span>
-                    <span className="boot-module-state">{isReadyToEnter ? "ACCESS" : (isReady ? "ready" : "pending")}</span>
+                    {isReadyToEnter ? (
+                      <button
+                        type="button"
+                        className="boot-module-button"
+                        role="menuitem"
+                        onClick={() => completeBoot(mod.id)}
+                      >
+                        <span className="boot-module-status" />
+                        <span className="boot-module-name">{mod.label}</span>
+                        <span className="boot-module-state">ACCESS</span>
+                      </button>
+                    ) : (
+                      <>
+                        <span className="boot-module-status" />
+                        <span className="boot-module-name">{mod.label}</span>
+                        <span className="boot-module-state">{isReady ? "ready" : "pending"}</span>
+                      </>
+                    )}
                   </li>
                 );
               })}
@@ -157,9 +181,9 @@ export function BootScreen() {
               </span>
             </div>
           ) : (
-            <div className="boot-ready-prompt" onClick={() => completeBoot()}>
+            <button type="button" className="boot-ready-prompt" onClick={() => completeBoot()}>
               Enter Portfolio Normally ↵
-            </div>
+            </button>
           )}
         </div>
       </div>
